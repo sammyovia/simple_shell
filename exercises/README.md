@@ -1,1 +1,1 @@
-Non-empty
+Description for simple shell project.
