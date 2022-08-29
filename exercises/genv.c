@@ -5,7 +5,7 @@
  *
  * Return: Always 0.
  */
-int main(int ac, char **av, char **environ)
+int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, char **environ)
 {
     unsigned int i;
 
