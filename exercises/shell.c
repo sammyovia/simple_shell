@@ -1,7 +1,7 @@
 /***************************************************************************//**
   @file         main.c
-  @author       Stephen Brennan
-  @date         Thursday,  8 January 2015
+  @author       sammy
+  @date         Sunday,  28 August 2022 
   @brief        LSH (Libstephen SHell)
 *******************************************************************************/
 
