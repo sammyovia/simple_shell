@@ -62,7 +62,7 @@ int lsh_cd(char **args)
    @param args List of args.  Not examined.
    @return Always returns 1, to continue executing.
  */
-int lsh_help(char **args)
+int lsh_help(__attribute__((unused)) char **args)
 {
   int i;
   printf("Stephen Brennan's LSH\n");
@@ -82,7 +82,7 @@ int lsh_help(char **args)
    @param args List of args.  Not examined.
    @return Always returns 0, to terminate execution.
  */
-int lsh_exit(char **args)
+int lsh_exit(__attribute__((unused)) char **args)
 {
   return 0;
 }
@@ -99,16 +99,16 @@ int lsh_launch(char **args)
 
   pid = fork();
   if (pid == 0) {
-    // Child process
+    /* Child process*/
     if (execvp(args[0], args) == -1) {
       perror("lsh");
     }
     exit(EXIT_FAILURE);
   } else if (pid < 0) {
-    // Error forking
+    /* Error forking*/
     perror("lsh");
   } else {
-    // Parent process
+    /* Parent process*/
     do {
       waitpid(pid, &status, WUNTRACED);
     } while (!WIFEXITED(status) && !WIFSIGNALED(status));
@@ -127,7 +127,7 @@ int lsh_execute(char **args)
   int i;
 
   if (args[0] == NULL) {
-    // An empty command was entered.
+    /* An empty command was entered.*/
     return 1;
   }
 
@@ -148,10 +148,10 @@ char *lsh_read_line(void)
 {
 #ifdef LSH_USE_STD_GETLINE
   char *line = NULL;
-  ssize_t bufsize = 0; // have getline allocate a buffer for us
+  ssize_t bufsize = 0; /* have getline allocate a buffer for us*/
   if (getline(&line, &bufsize, stdin) == -1) {
     if (feof(stdin)) {
-      exit(EXIT_SUCCESS);  // We received an EOF
+      exit(EXIT_SUCCESS);  /* We received an EOF*/
     } else  {
       perror("lsh: getline\n");
       exit(EXIT_FAILURE);
@@ -171,7 +171,7 @@ char *lsh_read_line(void)
   }
 
   while (1) {
-    // Read a character
+    /* Read a character*/
     c = getchar();
 
     if (c == EOF) {
@@ -184,7 +184,7 @@ char *lsh_read_line(void)
     }
     position++;
 
-    // If we have exceeded the buffer, reallocate.
+    /* If we have exceeded the buffer, reallocate.*/
     if (position >= bufsize) {
       bufsize += LSH_RL_BUFSIZE;
       buffer = realloc(buffer, bufsize);
@@ -263,14 +263,14 @@ void lsh_loop(void)
    @param argv Argument vector.
    @return status code
  */
-int main(int argc, char **argv)
+int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv)
 {
-  // Load config files, if any.
+  /* Load config files, if any.*/
 
-  // Run command loop.
+  /* Run command loop.*/
   lsh_loop();
 
-  // Perform any shutdown/cleanup.
+  /* Perform any shutdown/cleanup.*/
 
   return EXIT_SUCCESS;
 }
