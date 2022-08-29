@@ -5,10 +5,10 @@
  *
  * Return: Always 0.
  */
-int main(void)
+void main(void)
 {
-	extern char **environ;
-	printf("The begininng of environ is %p\n",&(*environ));
+	extern char **environ;       
+        printf("The begininng of environ is %p\n",&(*environ));
 
-    return (0);
+   /* return (0);*/
 }
