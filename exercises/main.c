@@ -1,11 +1,10 @@
 /***************************************************************************//**
   @file         main.c
-  @author       sammy
-  @date         Sunday,  28 August 2022 
-  @brief        LSH (Libstephen SHell)
+  @author       sammie 
 *******************************************************************************/
 
 #include <sys/wait.h>
+#include <sys/types.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -42,7 +41,7 @@ int lsh_num_builtins() {
 */
 
 /**
-   @brief Bultin command: change directory.
+   @brief Builtin command: change directory.
    @param args List of args.  args[0] is "cd".  args[1] is the directory.
    @return Always returns 1, to continue executing.
  */
@@ -95,7 +94,7 @@ int lsh_exit(char **args)
  */
 int lsh_launch(char **args)
 {
-  pid_t pid, wpid;
+  pid_t pid;
   int status;
 
   pid = fork();
@@ -111,7 +110,7 @@ int lsh_launch(char **args)
   } else {
     // Parent process
     do {
-      wpid = waitpid(pid, &status, WUNTRACED);
+      waitpid(pid, &status, WUNTRACED);
     } while (!WIFEXITED(status) && !WIFSIGNALED(status));
   }
 
@@ -141,13 +140,26 @@ int lsh_execute(char **args)
   return lsh_launch(args);
 }
 
-#define LSH_RL_BUFSIZE 1024
 /**
    @brief Read a line of input from stdin.
    @return The line from stdin.
  */
 char *lsh_read_line(void)
 {
+#ifdef LSH_USE_STD_GETLINE
+  char *line = NULL;
+  ssize_t bufsize = 0; // have getline allocate a buffer for us
+  if (getline(&line, &bufsize, stdin) == -1) {
+    if (feof(stdin)) {
+      exit(EXIT_SUCCESS);  // We received an EOF
+    } else  {
+      perror("lsh: getline\n");
+      exit(EXIT_FAILURE);
+    }
+  }
+  return line;
+#else
+#define LSH_RL_BUFSIZE 1024
   int bufsize = LSH_RL_BUFSIZE;
   int position = 0;
   char *buffer = malloc(sizeof(char) * bufsize);
@@ -162,8 +174,9 @@ char *lsh_read_line(void)
     // Read a character
     c = getchar();
 
-    // If we hit EOF, replace it with a null character and return.
-    if (c == EOF || c == '\n') {
+    if (c == EOF) {
+      exit(EXIT_SUCCESS);
+    } else if (c == '\n') {
       buffer[position] = '\0';
       return buffer;
     } else {
@@ -181,6 +194,7 @@ char *lsh_read_line(void)
       }
     }
   }
+#endif
 }
 
 #define LSH_TOK_BUFSIZE 64
@@ -194,7 +208,7 @@ char **lsh_split_line(char *line)
 {
   int bufsize = LSH_TOK_BUFSIZE, position = 0;
   char **tokens = malloc(bufsize * sizeof(char*));
-  char *token;
+  char *token, **tokens_backup;
 
   if (!tokens) {
     fprintf(stderr, "lsh: allocation error\n");
@@ -208,8 +222,10 @@ char **lsh_split_line(char *line)
 
     if (position >= bufsize) {
       bufsize += LSH_TOK_BUFSIZE;
+      tokens_backup = tokens;
       tokens = realloc(tokens, bufsize * sizeof(char*));
       if (!tokens) {
+		free(tokens_backup);
         fprintf(stderr, "lsh: allocation error\n");
         exit(EXIT_FAILURE);
       }
