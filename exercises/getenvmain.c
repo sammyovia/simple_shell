@@ -6,7 +6,7 @@
  *
  * Return: Always 0.
  */
-int main(int ac, char **av, char **env)
+/*int main(int ac, char **av, char **env)
 {
     unsigned int i;
 
@@ -17,4 +17,21 @@ int main(int ac, char **av, char **env)
         i++;
     }
     return (0);
-}
+}*/
+
+#include<stdio.h>
+	#include<stdlib.h>
+
+	int main ()
+	{
+		char * ptr_path;
+		ptr_path = _getenv("PATH");
+
+		if (ptr_path!=NULL)
+			printf ("The set PATH is: %s\n",ptr_path);
+		else
+			printf("Nothing to show\n");
+
+		return 0;
+	}
+
