@@ -26,4 +26,4 @@ for (i = 0; environ[i] != NULL; i++)
 return (NULL);
 }
 
-getEnv = _getenv("PATH");
+/*getEnv = _getenv("PATH");*/
