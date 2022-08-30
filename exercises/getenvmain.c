@@ -13,7 +13,7 @@ int main(int ac, char **av, char **env)
     i = 0;
     while (env[i] != NULL)
     {
-        printf("%s\n", env[i]);
+        _getenv("%s\n", env[i]);
         i++;
     }
     return (0);
