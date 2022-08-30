@@ -1,12 +1,29 @@
 #include "main.h"
-#include <stdlib.h>
-#include <stdio.h>
 
-int main (void) {
+char *_getenv(const char *name)
+{
+    int i, j;
+    int status;
+    extern char **environ;
 
-	char *_getenv(const char *name)
-	{
-		printf("PATH : %s\n", _getenv("PATH"));
-		return (0);
-	}
+for (i = 0; environ[i] != NULL; i++)
+{
+    status = 1;
+    for (j = 0; environ[i][j] != '='; j++)
+    {
+        if (name[j] != environ[i][j])
+        {
+            status = 0;
+            break;
+        }
+    }
+
+    if (status)
+    {
+        return (&environ[i][j + 1]);
+    }
 }
+return (NULL);
+}
+
+getEnv = _getenv("PATH");
