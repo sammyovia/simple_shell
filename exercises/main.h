@@ -10,7 +10,7 @@ typedef struct list_s
 	unsigned int len;
 	struct list_s *next;
 } list_t;
-
+char *_strtok(char *str, const char *delim);
 char *_getenv(const char *name);
 
 #endif /* MAIN_H */

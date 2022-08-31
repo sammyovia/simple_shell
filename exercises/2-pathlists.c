@@ -10,49 +10,37 @@ typedef struct Node
     struct Node *next;
 } Node_p;
 
-char *_strtok(char *str, const char *delim);
-
-/* To tokenize the pathname*/
-
-char *strtok(char *str, const char *delim)
-{
-	char stn[] = {_getenv("PATH")};
-	const char s[] = ":";
-	char *tok; 
-
-	tok = strtok(stn, s);
-
-	while (tok != NULL)
-	{
-		tok = strtok(NULL, s);
-	}
-	return (0);
-}
-
 
 /* To creste the linked list from the tokenized path*/
 
-Node_p *_pathlist(char *path)
+Node_p *_pathlist(char *pathname, char  **pathcopy)
 {
 	char *token = NULL;
 	Node_p *head;
 	Node_p *pathnode;
 
-	if (path == NULL)
+	if (pathname == NULL)
 		return (NULL);
+
+	*pathcopy = strdup(pathname);
 
 	head = NULL;
 	pathnode = malloc(sizeof(Node_p));
 	if (pathnode == NULL)
 		return (NULL);
 
-	token = _strtok();
+	token = strtok(*pathcopy, ":");
 	pathnode->str = token;
 	pathnode->next = head;
 	head = pathnode;
 
 	while (token != NULL)
 	{
+		token = strtok(NULL, ":");
+		if (token == NULL)
+		{
+			break;
+		}
 		pathnode = malloc(sizeof(Node_p)); 
         if (pathnode == NULL) 
             return (NULL);
@@ -64,7 +52,33 @@ Node_p *_pathlist(char *path)
 	
 }
 
+Node_p *displayList(char **pathcopy)
+{
+	char *getEnv;
+    Node_p *pathDirs;
 
-/* print the list*/
+    getEnv = _getenv("PATH");
+    pathDirs = _pathlist(getEnv, pathcopy);
 
+    return (pathDirs);	
+
+}
+
+int main ()
+        {
+		char *pathcopy = getenv("PATH");
+                Node_p *head, *new;
+                head = displayList(&pathcopy);
+		new = head;
+
+                if (new !=NULL)
+		{
+                        printf ("The Linked list is: %s\n", new->str);
+			new = new->next;
+		}
+                else
+                        printf("Nothing to show\n");
+
+                return 0;
+        }
 
