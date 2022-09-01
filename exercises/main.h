@@ -12,5 +12,6 @@ typedef struct list_s
 } list_t;
 
 char *_getenv(const char *name);
+char *_strtok(char *str, const char *delim);
 
 #endif /* MAIN_H */

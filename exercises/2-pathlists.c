@@ -4,13 +4,13 @@
 #include <stddef.h>
 #include "main.h" 
 
+
+
 typedef struct Node
 {
     char *str;
     struct Node *next;
 } Node_p;
-
-char *_strtok(char *str, const char *delim);
 
 /* To tokenize the pathname*/
 
@@ -67,4 +67,18 @@ Node_p *_pathlist(char *path)
 
 /* print the list*/
 
+#include<stdio.h>
+        #include<stdlib.h>
 
+        int main ()
+        {
+                char * ptr_path;
+                ptr_path = _getenv("PATH");
+
+                if (ptr_path!=NULL)
+                        printf ("The set PATH is: %s\n",ptr_path);
+                else
+                        printf("Nothing to show\n");
+
+                return 0;
+        }
