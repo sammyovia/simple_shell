@@ -1,0 +1,14 @@
+/* ignore all main.c files */
+*main.c
+
+/* ignore _putchar.c file */
+*_putchar.c
+
+# Ignore all
+*
+
+# Unignore all with extensions
+!*.*
+
+# Unignore all dirs
+!*/
