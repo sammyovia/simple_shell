@@ -67,14 +67,13 @@ Node_p *displayList(char **pathcopy)
 int main ()
         {
 		char *pathcopy = getenv("PATH");
-                Node_p *head, *new;
+                Node_p *head;
                 head = displayList(&pathcopy);
-		new = head;
 
-                if (new !=NULL)
+                if (head !=NULL)
 		{
-                        printf ("The Linked list is: %s\n", new->str);
-			new = new->next;
+                        printf ("The Linked list is: %s\n", head->str);
+			head = head->next;
 		}
                 else
                         printf("Nothing to show\n");
