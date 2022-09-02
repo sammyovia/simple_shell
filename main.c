@@ -1,8 +1,3 @@
-/***************************************************************************//**
-  @file         main.c
-  @author       sammie 
-*******************************************************************************/
-
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -41,9 +36,9 @@ int lsh_num_builtins() {
 */
 
 /**
-   @brief Builtin command: change directory.
-   @param args List of args.  args[0] is "cd".  args[1] is the directory.
-   @return Always returns 1, to continue executing.
+   @brief -  Builtin command: change directory.
+   @param - args List of args.  args[0] is "cd".  args[1] is the directory.
+   @return - Always returns 1, to continue executing.
  */
 int lsh_cd(char **args)
 {
@@ -58,14 +53,14 @@ int lsh_cd(char **args)
 }
 
 /**
-   @brief Builtin command: print help.
-   @param args List of args.  Not examined.
-   @return Always returns 1, to continue executing.
+   @brief - Builtin command: print help.
+   @param - args List of args.  Not examined.
+   @return - Always returns 1, to continue executing.
  */
 int lsh_help(__attribute__((unused)) char **args)
 {
   int i;
-  printf("sammy's shell LSH\n");
+  printf("sammy and Danny's shell for ALX LSH\n");
   printf("Type program names and arguments, and hit enter.\n");
   printf("The following are built in:\n");
 
@@ -78,9 +73,9 @@ int lsh_help(__attribute__((unused)) char **args)
 }
 
 /**
-   @brief Builtin command: exit.
-   @param args List of args.  Not examined.
-   @return Always returns 0, to terminate execution.
+   @brief - Builtin command: exit.
+   @param - args List of args.  Not examined.
+   @return - Always returns 0, to terminate execution.
  */
 int lsh_exit(__attribute__((unused)) char **args)
 {
@@ -88,9 +83,9 @@ int lsh_exit(__attribute__((unused)) char **args)
 }
 
 /**
-  @brief Launch a program and wait for it to terminate.
-  @param args Null terminated list of arguments (including program).
-  @return Always returns 1, to continue execution.
+  @brief - Launch a program and wait for it to terminate.
+  @param - args Null terminated list of arguments (including program).
+  @return - Always returns 1, to continue execution.
  */
 int lsh_launch(char **args)
 {
