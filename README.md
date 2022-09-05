@@ -326,9 +326,9 @@ $
 - Twitter: [@sammy4nv](https://twitter.com/sammy4nv)
 - Blog: [Personal Blog](https://blog.sammyovia.com)
 
-👤 **JUSTICE MENSAH BLAY MEWUBE**
+👤 **JULIUS DANIEL SUCCESSFUL**
 
-- GitHub: [@JUSTICEMENSAH-ALX](https://github.com/JUSTICEMENSAH-ALX)
-- LinkedIn: [LinkedIn](linkedin.com/in/mensah-blay-justice)
-- Twitter: [@JUSTICEMBLAY](https://twitter.com/justicemensahblaymewube)
+- GitHub: [@BISHOPDAN](https://github.com/BISHOPDAN)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/julius-daniel-857a44212/)
+- Twitter: [@Dani6ixsuccess6](https://twitter.com/Dani6ixSuccess6)
 
