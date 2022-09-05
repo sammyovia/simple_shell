@@ -1,1 +1,1 @@
-Description for simple shell project.
+Exercises for the simple shell project
